@@ -1,7 +1,8 @@
 const express = require('express'),
   router = express.Router(),
   bcrypt = require('bcryptjs'),
-  User = require('../models/users-model');
+  User = require('../models/users-model'),
+  UsersControllers = require('../controllers/users-controllers');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -31,18 +32,7 @@ router.get('/login', (req, res) => {
   });
 });
 
-router.get('/signup', (req, res) => {
-  res.render('template', { 
-  locals: {
-      title: 'Sign Up Page' ,
-      is_logged_in: req.session.is_logged_in
-
-  },
-  partials: {
-      partial: 'partial-signup-form'
-  }  
-  });
-});
+router.get('/signup', UsersControllers.signup_get);
 
 
 router.post('/login', (req, res) => {
